@@ -1,4 +1,5 @@
-import { LineAtClass } from ".";
+import { LineAtClass } from "./";
+
 
 // user
 const userId = "test-user";

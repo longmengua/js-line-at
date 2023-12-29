@@ -1,6 +1,7 @@
 import { version } from './package.json'
 import express from 'express';
 import bodyParser from 'body-parser';
+import { LineAtService } from './service/lineAtService';
 
 const app = express();
 const port = 3000;
@@ -14,7 +15,7 @@ app.get('/', (req, res) => {
   });
 });
 
-app.post('/webhook', (req, res) => {
+app.post('/webhook', async (req, res) => {
   // Extract the message from the request body
   const { message } = req.body;
 
@@ -25,7 +26,8 @@ app.post('/webhook', (req, res) => {
   res.json({ status: 'Message received successfully' });
 });
 
-app.post('/demo', (req, res) => {
+app.post('/demo', async (req, res) => {
+  await LineAtService()
   res.send("ok");
 });
 
