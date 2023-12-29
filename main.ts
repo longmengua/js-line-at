@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import { LineAtService } from './service/lineAtService';
 
 const app = express();
-const port = 3000;
+const port = 5000;
 
 // Middleware to parse JSON in the request body
 app.use(bodyParser.json());
