@@ -23,7 +23,7 @@ app.post('/webhook', async (req, res) => {
   console.log('Received message:', message);
 
   // Send a response back to the sender (optional)
-  res.json({ status: 'Message received successfully' });
+  res.json({ status: 'Message received successfully', message });
 });
 
 app.post('/demo', async (req, res) => {
