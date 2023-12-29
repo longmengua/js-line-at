@@ -2,19 +2,93 @@ import { LineAtClass } from "./util/line-at";
 
 (async () => {
   const lineAtClass = new LineAtClass({
-    apiBaseUrl: ""
+    channelAccessToken: "S3jREon0tWiSYe+lw3LqVJmlB7Cgj1udFqZuxvFOT9nuXzWT8i8NofJaX37FGnsQZpMGYjb+5G8EbaB/Bg2dVfUWwEoWkEHIWOmGW3Rcwawr50gofpqMy/7HTg6MwaGlicxg+OG6E5cDfofJG2BVCAdB04t89/1O/w1cDnyilFU="
   })
 
-  // 使用範例
-  lineAtClass.broadcastMessage('這是一則廣播消息');
-  lineAtClass.pushToUser('目標使用者的ID', '這是推送給單個使用者的消息');
-  lineAtClass.multiPushToUsers(['使用者1的ID', '使用者2的ID'], '這是推送給多個使用者的消息');
-  lineAtClass.sendMultiPageMessage([
-    { page: 1, content: '這是第一頁的內容' },
-    { page: 2, content: '這是第二頁的內容' },
+  const userId = ''
+
+  // Photo message
+  const photoMessage = {
+    to: userId,
+    messages: [
+      {
+        type: 'image',
+        originalContentUrl: 'https://example.com/original.jpg',
+        previewImageUrl: 'https://example.com/preview.jpg',
+      },
+    ],
+  };
+
+  // Rich message
+  const richMessage = {
+    to: userId,
+    messages: [
+      {
+        type: 'flex',
+        altText: 'This is a rich message',
+        contents: {
+          type: 'bubble',
+          body: {
+            type: 'box',
+            layout: 'vertical',
+            contents: [
+              {
+                type: 'text',
+                text: 'Hello, this is a rich message!',
+              },
+            ],
+          },
+        },
+      },
+    ],
+  };
+
+  // Card-based message
+  const cardMessage = {
+    to: userId,
+    messages: [
+      {
+        type: 'template',
+        altText: 'This is a card-based message',
+        template: {
+          type: 'buttons',
+          thumbnailImageUrl: 'https://example.com/image.jpg',
+          title: 'Card Title',
+          text: 'Card Description',
+          actions: [
+            {
+              type: 'message',
+              label: 'Action 1',
+              text: 'Action 1 clicked!',
+            },
+            {
+              type: 'uri',
+              label: 'Visit Website',
+              uri: 'https://example.com',
+            },
+          ],
+        },
+      },
+    ],
+  };
+
+  // Text message
+  const textMessage = {
+    to: userId,
+    messages: [
+      {
+        type: 'text',
+        text: 'Hello, this is a text message!',
+      },
+    ],
+  };
+
+  // photo message 圖片訊息
+  lineAtClass.sendMessage([
+    textMessage, 
+    photoMessage, 
+    richMessage, 
+    cardMessage,
   ])
-  lineAtClass.sendRichTextMessage([
-    { type: 'text', content: '歡迎使用我們的服務！' },
-    { type: 'image', url: 'https://example.com/image.jpg', caption: '圖片說明' },
-  ])
+
 })()

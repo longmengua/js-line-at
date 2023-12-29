@@ -1,80 +1,84 @@
 import axios from 'axios';
 
+/**
+ * apiBaseUrl => https://api.line.me/v2/bot/message/push
+*/
+interface TextMessageType {
+  to: string | string[];
+  messages: Array<{
+    type: string;
+    text: string;
+  }>;
+}
+
+interface CardBasedMessageType {
+  to: string | string[];
+  messages: Array<{
+    type: string;
+    altText: string;
+    template: {
+      type: string;
+      thumbnailImageUrl: string;
+      title: string;
+      text: string;
+      actions: Array<{
+        type: string;
+        label: string;
+        text?: string;
+        uri?: string;
+      }>;
+    };
+  }>;
+}
+
+interface RichMessageType {
+  to: string | string[];
+  messages: Array<{
+    type: string;
+    altText: string;
+    contents: {
+      type: string;
+      body: {
+        type: string;
+        layout: string;
+        contents: Array<{
+          type: string;
+          text: string;
+        }>
+      };
+    };
+  }>
+}
+
+interface PhotoMessageType {
+  to: string | string[];
+  messages: Array<{
+    type: string;
+    originalContentUrl: string;
+    previewImageUrl: string;
+  }>;
+}
+
+export type LineAtMessageType = PhotoMessageType | RichMessageType | CardBasedMessageType | TextMessageType
 export class LineAtClass {
-  private apiBaseUrl: string;
+  private apiBaseUrl: string = "https://api.line.me/v2/bot/message/push";
+  private channelAccessToken: string;
 
   constructor(p: {
-    apiBaseUrl: string
+    apiBaseUrl?: string,
+    channelAccessToken: string,
   }) {
-    this.apiBaseUrl = p.apiBaseUrl
+    if (p.apiBaseUrl) this.apiBaseUrl = p.apiBaseUrl
+
+    this.channelAccessToken = p.channelAccessToken
   }
 
+  sendMessage = async (message: LineAtMessageType[]): Promise<any> => {
+    const headers = {
+      'Content-Type': 'application/json',
+      Authorization: `Bearer ${this.channelAccessToken}`,
+    };
 
-  // 廣播消息
-  broadcastMessage = async function(message: string): Promise<void> {
-    try {
-      const response = await axios.post(`${this.apiBaseUrl}/broadcast`, {
-        message: message,
-      });
-      console.log('廣播成功:', response.data);
-    } catch (error) {
-      console.error('廣播失敗:', (error as Error).message);
-    }
+    return axios.post(this.apiBaseUrl, message, { headers })
   }
-
-  // 推送消息給單個使用者
-  pushToUser = async function(userId: string, message: string): Promise<void> {
-    try {
-      const response = await axios.post(`${this.apiBaseUrl}/push`, {
-        user_id: userId,
-        message: message,
-      });
-      console.log('推送成功:', response.data);
-    } catch (error) {
-      console.error('推送失敗:', (error as Error).message);
-    }
-  }
-
-    // 推送消息給多個使用者
-    multiPushToUsers = async function(userIds: string[], message: string): Promise<void> {
-      try {
-        const response = await axios.post(`${this.apiBaseUrl}/multi-push`, {
-          user_ids: userIds,
-          message: message,
-        });
-        console.log('多個推送成功:', response.data);
-      } catch (error) {
-        console.error('多個推送失敗:', (error as Error).message);
-      }
-    }
-
-    sendMultiPageMessage = async function (pages: Array<{
-      page: number;
-      content: string;
-    }>): Promise<void> {
-      try {
-        const response = await axios.post(`${this.apiBaseUrl}/multi-page`, {
-          pages: pages,
-        });
-        console.log('多頁訊息發送成功:', response.data);
-      } catch (error) {
-        console.error('多頁訊息發送失敗:', (error as Error).message);
-      }
-    }
-    
-    sendRichTextMessage = async function(elements: Array<{
-      type: 'text' | 'image';
-      content?: string;
-      url?: string;
-      caption?: string;
-    }>): Promise<void> {
-      try {
-        const response = await axios.post(`${this.apiBaseUrl}/rich-text`, {
-          elements: elements,
-        });
-        console.log('圖文訊息發送成功:', response.data);
-      } catch (error) {
-        console.error('圖文訊息發送失敗:', (error as Error).message);
-      }
-    }
 }
