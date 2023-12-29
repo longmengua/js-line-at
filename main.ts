@@ -1,94 +1,34 @@
-import { LineAtClass } from "./util/line-at";
+import { version } from './package.json'
+import express from 'express';
+import bodyParser from 'body-parser';
 
-(async () => {
-  const lineAtClass = new LineAtClass({
-    channelAccessToken: "S3jREon0tWiSYe+lw3LqVJmlB7Cgj1udFqZuxvFOT9nuXzWT8i8NofJaX37FGnsQZpMGYjb+5G8EbaB/Bg2dVfUWwEoWkEHIWOmGW3Rcwawr50gofpqMy/7HTg6MwaGlicxg+OG6E5cDfofJG2BVCAdB04t89/1O/w1cDnyilFU="
-  })
+const app = express();
+const port = 3000;
 
-  const userId = ''
+// Middleware to parse JSON in the request body
+app.use(bodyParser.json());
 
-  // Photo message
-  const photoMessage = {
-    to: userId,
-    messages: [
-      {
-        type: 'image',
-        originalContentUrl: 'https://example.com/original.jpg',
-        previewImageUrl: 'https://example.com/preview.jpg',
-      },
-    ],
-  };
+app.get('/', (req, res) => {
+  res.send({
+    version
+  });
+});
 
-  // Rich message
-  const richMessage = {
-    to: userId,
-    messages: [
-      {
-        type: 'flex',
-        altText: 'This is a rich message',
-        contents: {
-          type: 'bubble',
-          body: {
-            type: 'box',
-            layout: 'vertical',
-            contents: [
-              {
-                type: 'text',
-                text: 'Hello, this is a rich message!',
-              },
-            ],
-          },
-        },
-      },
-    ],
-  };
+app.post('/webhook', (req, res) => {
+  // Extract the message from the request body
+  const { message } = req.body;
 
-  // Card-based message
-  const cardMessage = {
-    to: userId,
-    messages: [
-      {
-        type: 'template',
-        altText: 'This is a card-based message',
-        template: {
-          type: 'buttons',
-          thumbnailImageUrl: 'https://example.com/image.jpg',
-          title: 'Card Title',
-          text: 'Card Description',
-          actions: [
-            {
-              type: 'message',
-              label: 'Action 1',
-              text: 'Action 1 clicked!',
-            },
-            {
-              type: 'uri',
-              label: 'Visit Website',
-              uri: 'https://example.com',
-            },
-          ],
-        },
-      },
-    ],
-  };
+  // Process the message (you can replace this with your own logic)
+  console.log('Received message:', message);
 
-  // Text message
-  const textMessage = {
-    to: userId,
-    messages: [
-      {
-        type: 'text',
-        text: 'Hello, this is a text message!',
-      },
-    ],
-  };
+  // Send a response back to the sender (optional)
+  res.json({ status: 'Message received successfully' });
+});
 
-  // photo message 圖片訊息
-  lineAtClass.sendMessage([
-    textMessage, 
-    photoMessage, 
-    richMessage, 
-    cardMessage,
-  ])
+app.post('/demo', (req, res) => {
+  res.send("ok");
+});
 
-})()
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
+});
