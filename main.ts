@@ -20,7 +20,7 @@ app.post('/webhook', async (req, res) => {
   const { message } = req.body;
 
   // Process the message (you can replace this with your own logic)
-  console.log('Received message:', req?.body);
+  console.log('Received message:', JSON.stringify(req?.body));
 
   // Send a response back to the sender (optional)
   res.json({ status: 'Message received successfully', message });
