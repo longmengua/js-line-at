@@ -3,6 +3,9 @@ import { LineAtClass } from "../util/line-at";
 // user
 const userId = "U9e0e41ffdaa2917f3f20aa223a337a96";
 
+// token
+const channelAccessToken = "S3jREon0tWiSYe+lw3LqVJmlB7Cgj1udFqZuxvFOT9nuXzWT8i8NofJaX37FGnsQZpMGYjb+5G8EbaB/Bg2dVfUWwEoWkEHIWOmGW3Rcwawr50gofpqMy/7HTg6MwaGlicxg+OG6E5cDfofJG2BVCAdB04t89/1O/w1cDnyilFU=";
+
 // Photo message
 const photoMessage = {
   to: userId,
@@ -85,7 +88,7 @@ const textMessage = {
 
 export const LineAtService = async() => {
   const lineAtClass = new LineAtClass({
-    channelAccessToken: "S3jREon0tWiSYe+lw3LqVJmlB7Cgj1udFqZuxvFOT9nuXzWT8i8NofJaX37FGnsQZpMGYjb+5G8EbaB/Bg2dVfUWwEoWkEHIWOmGW3Rcwawr50gofpqMy/7HTg6MwaGlicxg+OG6E5cDfofJG2BVCAdB04t89/1O/w1cDnyilFU=",
+    channelAccessToken
   });
   
   lineAtClass.sendMessage([
