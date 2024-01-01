@@ -1,11 +1,11 @@
 import { LineAtClass } from "../util/line-at";
 
 // user
-const userId = "test-user";
+const userId = "U9e0e41ffdaa2917f3f20aa223a337a96";
 
 // Photo message
 const photoMessage = {
-  to: [userId],
+  to: userId,
   messages: [
     {
       type: 'image',
@@ -17,7 +17,7 @@ const photoMessage = {
 
 // Rich message
 const richMessage = {
-  to: [userId],
+  to: userId,
   messages: [
     {
       type: 'flex',
@@ -41,7 +41,7 @@ const richMessage = {
 
 // Card-based message
 const cardMessage = {
-  to: [userId],
+  to: userId,
   messages: [
     {
       type: 'template',
@@ -70,11 +70,15 @@ const cardMessage = {
 
 // Text message
 const textMessage = {
-  to: [userId],
+  to: userId,
   messages: [
     {
       type: 'text',
-      text: 'Hello, this is a text message!',
+      text: 'Hello, world3',
+    },
+    {
+      type: 'text',
+      text: 'Hello, world4',
     },
   ],
 };

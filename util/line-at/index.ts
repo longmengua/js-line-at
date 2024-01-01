@@ -73,12 +73,28 @@ export class LineAtClass {
     this.channelAccessToken = p.channelAccessToken
   }
 
-  sendMessage = async (message: LineAtMessageType[]): Promise<any> => {
+  sendMessage = async (messages: LineAtMessageType[]): Promise<any> => {
     const headers = {
       'Content-Type': 'application/json',
-      Authorization: `Bearer ${this.channelAccessToken}`,
+      'Authorization': `Bearer ${this.channelAccessToken}`
     };
 
-    return axios.post(this.apiBaseUrl, message, { headers })
+    const promises = messages.map(m => {
+      return axios.post(this.apiBaseUrl, m, { headers })
+    })
+
+    return await Promise.allSettled(promises)
+      // .then((results) => {
+      //   results.forEach((result) => {
+      //     if (result.status === 'fulfilled') {
+      //       console.log('ok');
+      //     } else if (result.status === 'rejected') {
+      //       console.log(result.reason);
+      //     }
+      //   });
+      // })
+      // .catch((error) => {
+      //   console.error(`Error: ${error}`);
+      // });
   }
 }
