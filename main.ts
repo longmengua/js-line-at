@@ -1,5 +1,5 @@
 import { version } from './package.json'
-import express from 'express';
+import express, { Request, Response } from 'express';
 import bodyParser from 'body-parser';
 import { LineAtService } from './service/lineAtService';
 
@@ -9,13 +9,13 @@ const port = 5000;
 // Middleware to parse JSON in the request body
 app.use(bodyParser.json());
 
-app.get('/', (_req, res) => {
+app.get('/', async (req: Request, res: Response) => {
   res.send({
     version
   });
 });
 
-app.post('/webhook', async (req, res) => {
+app.post('/webhook', async (req: Request, res: Response) => {
   // Extract the message from the request body
   const { message } = req.body;
 
@@ -26,14 +26,12 @@ app.post('/webhook', async (req, res) => {
   res.json({ status: 'Message received successfully', message });
 });
 
-app.post('/demo', async (_req, res) => {
+app.get('/demo', async (req: Request, res: Response) => {
   await LineAtService()
   res.send("ok");
 });
 
-app.use((err: any, _req, res: any) => {
-  console.error('Error:', err);
-
+app.use((err: any, req: Request, res: Response, next: any) => {
   // Set a default status code
   let statusCode = 500;
 
@@ -42,7 +40,7 @@ app.use((err: any, _req, res: any) => {
     statusCode = 400; // Bad Request (e.g., JSON parsing error)
   }
 
-  res.status(statusCode).json({
+  res?.status(statusCode)?.json({
     status: 'Error',
     message: err.message,
   });

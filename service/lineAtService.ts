@@ -8,82 +8,110 @@ const channelAccessToken = "S3jREon0tWiSYe+lw3LqVJmlB7Cgj1udFqZuxvFOT9nuXzWT8i8N
 
 // Photo message
 const photoMessage = {
-  to: userId,
-  messages: [
-    {
-      type: 'image',
-      originalContentUrl: 'https://example.com/original.jpg',
-      previewImageUrl: 'https://example.com/preview.jpg',
-    },
-  ],
+  type: 'image',
+  originalContentUrl: 'https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300',
+  previewImageUrl: 'https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300',
 };
 
 // Rich message
 const richMessage = {
-  to: userId,
-  messages: [
+  "type": "imagemap",
+  "baseUrl": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300",
+  "altText": "This is an imagemap",
+  "baseSize": {
+    "width": 1040,
+    "height": 1040
+  },
+  "actions": [
     {
-      type: 'flex',
-      altText: 'This is a rich message',
-      contents: {
-        type: 'bubble',
-        body: {
-          type: 'box',
-          layout: 'vertical',
-          contents: [
-            {
-              type: 'text',
-              text: 'Hello, this is a rich message!',
-            },
-          ],
-        },
-      },
+      "type": "uri",
+      "linkUri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300",
+      "area": {
+        "x": 0,
+        "y": 0,
+        "width": 520,
+        "height": 1040
+      }
     },
-  ],
+    {
+      "type": "message",
+      "text": "Hello",
+      "area": {
+        "x": 520,
+        "y": 0,
+        "width": 520,
+        "height": 1040
+      }
+    }
+  ]
+};
+
+const flexMessage = {
+  "type": "flex",
+  "altText": "This is a Flex Message",
+  "contents": {
+    "type": "bubble",
+    "body": {
+      "type": "box",
+      "layout": "vertical",
+      "contents": [
+        {
+          "type": "text",
+          "text": "Hello, this is a Flex Message!",
+          "wrap": true
+        },
+        {
+          "type": "image",
+          "url": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300",
+          "size": "full",
+          "aspectRatio": "16:9"
+        },
+        {
+          "type": "button",
+          "style": "primary",
+          "action": {
+            "type": "uri",
+            "label": "Open Link",
+            "uri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300"
+          }
+        },
+        {
+          "type": "separator",
+          "margin": "md"
+        }
+      ]
+    }
+  }
 };
 
 // Card-based message
 const cardMessage = {
-  to: userId,
-  messages: [
-    {
-      type: 'template',
-      altText: 'This is a card-based message',
-      template: {
-        type: 'buttons',
-        thumbnailImageUrl: 'https://example.com/image.jpg',
-        title: 'Card Title',
-        text: 'Card Description',
-        actions: [
-          {
-            type: 'message',
-            label: 'Action 1',
-            text: 'Action 1 clicked!',
-          },
-          {
-            type: 'uri',
-            label: 'Visit Website',
-            uri: 'https://example.com',
-          },
-        ],
+  type: 'template',
+  altText: 'This is a card-based message',
+  template: {
+    type: 'buttons',
+    thumbnailImageUrl: 'https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300',
+    title: 'Card Title',
+    text: 'Card Description',
+    actions: [
+      {
+        type: 'message',
+        label: 'Action 1',
+        text: 'Action 1 clicked!',
       },
-    },
-  ],
+      {
+        type: 'uri',
+        label: 'Visit Website',
+        uri: 'https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300',
+      },
+    ],
+  },
 };
 
 // Text message
 const textMessage = {
-  to: userId,
-  messages: [
-    {
-      type: 'text',
-      text: 'Hello, world3',
-    },
-    {
-      type: 'text',
-      text: 'Hello, world4',
-    },
-  ],
+  type: 'text',
+  text: 'Hello, world',
 };
 
 export const LineAtService = async() => {
@@ -92,9 +120,15 @@ export const LineAtService = async() => {
   });
   
   lineAtClass.sendMessage([
-    textMessage,
-    photoMessage,
-    richMessage,
-    cardMessage,
+    {
+      to: userId,
+      messages: [
+        textMessage,
+        // photoMessage,
+        richMessage,
+        // cardMessage,
+        // flexMessage,
+      ]
+    }
   ]);
 }
