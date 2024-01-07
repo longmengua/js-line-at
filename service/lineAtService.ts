@@ -158,6 +158,92 @@ const flexCarouselMessage = {
           ]
         }
       },
+      {
+        "type": "bubble",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "image",
+              "url": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300",
+              "size": "full",
+            },
+            {
+              "type": "separator",
+              "margin": "lg"
+            },
+            // 每新增一個動作標籤，就新增一個這樣物件
+            {
+              "margin": "lg",
+              "type": "text",
+              "text": "Hello, World!",
+              "color": "#8CA6F9",
+              "align": "center",
+              "action": {
+                "type": "uri",
+                "label": "Buy",
+                "uri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300"
+              }
+            },
+            {
+              "margin": "lg",
+              "type": "text",
+              "text": "Hello, World!",
+              "color": "#8CA6F9",
+              "align": "center",
+              "action": {
+                "type": "uri",
+                "label": "Buy",
+                "uri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300"
+              }
+            },
+          ]
+        }
+      },
+      {
+        "type": "bubble",
+        "body": {
+          "type": "box",
+          "layout": "vertical",
+          "contents": [
+            {
+              "type": "image",
+              "url": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300",
+              "size": "full",
+            },
+            {
+              "type": "separator",
+              "margin": "lg"
+            },
+            // 每新增一個動作標籤，就新增一個這樣物件
+            {
+              "margin": "lg",
+              "type": "text",
+              "text": "Hello, World!",
+              "color": "#8CA6F9",
+              "align": "center",
+              "action": {
+                "type": "uri",
+                "label": "Buy",
+                "uri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300"
+              }
+            },
+            {
+              "margin": "lg",
+              "type": "text",
+              "text": "Hello, World!",
+              "color": "#8CA6F9",
+              "align": "center",
+              "action": {
+                "type": "uri",
+                "label": "Buy",
+                "uri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300"
+              }
+            },
+          ]
+        }
+      },
     ]
   }
 };
