@@ -97,40 +97,21 @@ const flexCarouselMessage = {
               "size": "full",
             },
             {
-              "type": "separator",
-              "margin": "lg"
-            },
-            {
               "margin": "lg",
               "type": "text",
-              "text": "Hello, World!",
-              "color": "#8CA6F9",
-              "align": "center",
-              "action": {
-                "type": "uri",
-                "label": "Buy",
-                "uri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300"
-              }
+              "text": "標題",
             },
-          ]
-        }
-      },
-      {
-        "type": "bubble",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
             {
-              "type": "image",
-              "url": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300",
-              "size": "full",
+              "margin": "md",
+              "type": "text",
+              "text": "說明..............................",
+              "color": "#A5A5A5",
             },
             {
               "type": "separator",
               "margin": "lg"
             },
-            // 每新增一個動作標籤，就新增一個這樣物件
+            // 動作標籤，複製下面object
             {
               "margin": "lg",
               "type": "text",
@@ -170,65 +151,21 @@ const flexCarouselMessage = {
               "size": "full",
             },
             {
-              "type": "separator",
-              "margin": "lg"
-            },
-            // 每新增一個動作標籤，就新增一個這樣物件
-            {
               "margin": "lg",
               "type": "text",
-              "text": "Hello, World!",
-              "color": "#8CA6F9",
-              "align": "center",
-              "action": {
-                "type": "uri",
-                "label": "Buy",
-                "uri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300"
-              }
+              "text": "標題",
             },
             {
-              "margin": "lg",
+              "margin": "md",
               "type": "text",
-              "text": "Hello, World!",
-              "color": "#8CA6F9",
-              "align": "center",
-              "action": {
-                "type": "uri",
-                "label": "Buy",
-                "uri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300"
-              }
-            },
-          ]
-        }
-      },
-      {
-        "type": "bubble",
-        "body": {
-          "type": "box",
-          "layout": "vertical",
-          "contents": [
-            {
-              "type": "image",
-              "url": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300",
-              "size": "full",
+              "text": "說明..............................",
+              "color": "#A5A5A5",
             },
             {
               "type": "separator",
               "margin": "lg"
             },
-            // 每新增一個動作標籤，就新增一個這樣物件
-            {
-              "margin": "lg",
-              "type": "text",
-              "text": "Hello, World!",
-              "color": "#8CA6F9",
-              "align": "center",
-              "action": {
-                "type": "uri",
-                "label": "Buy",
-                "uri": "https://obs.line-scdn.net/hQE2KGTU8DmoXMnhMdgQcVjRxTgh5A0tUMSdCX0xZFyZ9YQtCQT8KbUxzFiVQaUhdWigdWU8zGTJ9fQtvVQEGXmFCGwp-UA9Hbw5JcFo/300"
-              }
-            },
+            // 動作標籤，複製下面object
             {
               "margin": "lg",
               "type": "text",
