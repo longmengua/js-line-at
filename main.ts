@@ -93,6 +93,7 @@ app.post('/webhook', (req, res) => {
   const events = req.body.events;
 
   events.forEach((event: LineEvent) => {
+    console.log(JSON.stringify(event))
     switch (event.type) {
       case 'message':
         // Handle message event
