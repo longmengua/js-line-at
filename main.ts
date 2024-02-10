@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import { LineAtService } from './service/lineAtService';
 
 const app = express();
-const port = 80;
+const port = 3000;
 
 // Middleware to parse JSON in the request body
 app.use(bodyParser.json());
@@ -97,42 +97,33 @@ app.post('/webhook', (req, res) => {
     switch (event.type) {
       case 'message':
         // Handle message event
-        res.sendStatus(200).json({ code: '200001', data: event?.message, error: null, message: 'Message received' });
         break;
       case 'follow':
         // Handle follow event
-        res.sendStatus(200).json({ code: '200002', data: { userId: event?.source?.userId }, error: null, message: 'User added you as a friend' });
         break;
       case 'unfollow':
         // Handle unfollow event
-        res.sendStatus(200).json({ code: '200003', data: { userId: event?.source?.userId }, error: null, message: 'User removed you as a friend' });
         break;
       case 'join':
         // Handle join event
-        res.sendStatus(200).json({ code: '200004', data: { userId: event?.source?.userId }, error: null, message: 'User joined a group or added you as a friend in a multi-person chat' });
         break;
       case 'leave':
         // Handle leave event
-        res.sendStatus(200).json({ code: '200005', data: { userId: event?.source?.userId }, error: null, message: 'User left a group' });
         break;
       case 'memberJoined':
         // Handle memberJoined event
-        res.sendStatus(200).json({ code: '200006', data: { userId: event?.source?.userId }, error: null, message: 'User joined a group' });
         break;
       case 'memberLeft':
         // Handle memberLeft event
-        res.sendStatus(200).json({ code: '200006', data: { userId: event?.source?.userId }, error: null, message: 'User left a group' });
         break;
       case 'postback':
         // Handle postback event
-        res.sendStatus(200).json({ code: '200007', data: { userId: event?.source?.userId }, error: null, message: 'Postback action received' });
         break;
       case 'beacon':
         // Handle beacon event
-        res.sendStatus(200).json({ code: '200008', data: { userId: event?.source?.userId }, error: null, message: 'User entered the range of a beacon' });
         break;
       default:
-        res.sendStatus(200).json({ code: '200999', data: { userId: event?.source?.userId }, error: null, message: `Unhandled event type: ${event.type}` });
+        break;
     }
   });
 });
