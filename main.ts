@@ -4,7 +4,7 @@ import bodyParser from 'body-parser';
 import { LineAtService } from './service/lineAtService';
 
 const app = express();
-const port = 3000;
+const port = 80;
 
 // Middleware to parse JSON in the request body
 app.use(bodyParser.json());
@@ -137,8 +137,9 @@ app.post('/webhook', (req, res) => {
   });
 });
 
-app.get('/demo', async (req: Request, res: Response) => {
-  await LineAtService()
+app.get('/send-msg', async (req: Request, res: Response) => {
+  const userId: string = req?.query?.userId as string;
+  await LineAtService(userId)
   res.send("ok");
 });
 
