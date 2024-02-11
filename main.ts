@@ -129,6 +129,7 @@ app.post('/webhook', (req, res) => {
 });
 
 app.get('/send-msg', async (req: Request, res: Response) => {
+  // 
   const userId: string = req?.query?.userId as string;
   const msg = await LineAtService(userId)
   res.send({

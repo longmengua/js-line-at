@@ -61,7 +61,7 @@ interface PhotoMessageType {
 
 export type LineAtMessageType = PhotoMessageType | RichMessageType | CardBasedMessageType | TextMessageType | any
 export class LineAtClass {
-  private apiBaseUrl: string = "https://api.line.me/v2/bot/message";
+  private apiBaseUrl: string = "https://api.line.me/v2/bot";
   private channelAccessToken: string;
 
   constructor(p: {
@@ -81,7 +81,7 @@ export class LineAtClass {
 
     // https://api.line.me/v2/bot/message/push
     const promises = messages.map(async (m) => {
-      const res = await axios.post(`${this.apiBaseUrl}/push`, m, { headers })
+      const res = await axios.post(`${this.apiBaseUrl}/message/push`, m, { headers })
       return res
     })
 
@@ -96,10 +96,24 @@ export class LineAtClass {
 
     // https://api.line.me/v2/bot/message/broadcast
     const promises = messages.map(async (m) => {
-      const res = await axios.post(`${this.apiBaseUrl}/broadcast`, m, { headers })
+      const res = await axios.post(`${this.apiBaseUrl}/message/broadcast`, m, { headers })
       return res
     })
 
     return await Promise.allSettled(promises)
+  }
+
+  getProfile = async (userId?: string): Promise<any> => {
+    if (userId) {
+      throw new Error("Missing userId");
+    }
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.channelAccessToken}`
+    };
+
+    // https://api.line.me/v2/bot/profile/{userId}
+    return await axios.post(`${this.apiBaseUrl}/profile/${userId}`, { headers })
   }
 }

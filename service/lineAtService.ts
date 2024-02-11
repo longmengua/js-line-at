@@ -207,10 +207,10 @@ const cardMessage = {
 };
 
 // Text message
-const textMessage = {
+const textMessage = (name: string) => ({
   type: 'text',
-  text: `${new Date().toISOString()}\nWelcome to Waltor channel, feel free to say anything you like !!`,
-};
+  text: `Dear ${name}, how are you? What are you up to?`,
+});
 
 export const LineAtService = async(userId?: string) => {
   const lineAtClass = new LineAtClass({
@@ -218,11 +218,19 @@ export const LineAtService = async(userId?: string) => {
   });
 
   if (userId) {
-    lineAtClass.sendMessage([
+    const profile: {
+      displayName: string
+      userId: string
+      language: string
+      pictureUrl: string
+      statusMessage: string
+    } = await lineAtClass.getProfile(userId);
+
+    await lineAtClass.sendMessage([
       {
         to: userId,
         messages: [
-          textMessage,
+          textMessage(profile?.displayName ?? 'user'),
           // photoMessage,
           // richMessage,
           // cardMessage,
@@ -231,13 +239,15 @@ export const LineAtService = async(userId?: string) => {
         ]
       }
     ]);
+    return `sent message to ${profile?.displayName ?? '-'}`
   }
 
-  lineAtClass.broadcastMessage([
+  await lineAtClass.broadcastMessage([
     {
       messages: [
         textMessage,
       ]
     }
   ])
+  return "sent message to all"
 }
