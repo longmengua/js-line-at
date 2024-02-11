@@ -129,9 +129,13 @@ app.post('/webhook', (req, res) => {
 });
 
 app.get('/send-msg', async (req: Request, res: Response) => {
-  const userId: string = req?.query?.userId as string ?? '@all';
-  await LineAtService(userId)
-  res.send("ok");
+  const userId: string = req?.query?.userId as string;
+  const msg = await LineAtService(userId)
+  res.send({
+    code: 200,
+    data: null,
+    msg: msg,
+  });
 });
 
 app.use((err: any, req: Request, res: Response, next: any) => {

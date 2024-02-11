@@ -61,7 +61,7 @@ interface PhotoMessageType {
 
 export type LineAtMessageType = PhotoMessageType | RichMessageType | CardBasedMessageType | TextMessageType | any
 export class LineAtClass {
-  private apiBaseUrl: string = "https://api.line.me/v2/bot/message/push";
+  private apiBaseUrl: string = "https://api.line.me/v2/bot/message";
   private channelAccessToken: string;
 
   constructor(p: {
@@ -79,8 +79,24 @@ export class LineAtClass {
       'Authorization': `Bearer ${this.channelAccessToken}`
     };
 
+    // https://api.line.me/v2/bot/message/push
     const promises = messages.map(async (m) => {
-      const res = await axios.post(this.apiBaseUrl, m, { headers })
+      const res = await axios.post(`${this.apiBaseUrl}/push`, m, { headers })
+      return res
+    })
+
+    return await Promise.allSettled(promises)
+  }
+
+  broadcastMessage = async (messages: LineAtMessageType[]): Promise<any> => {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.channelAccessToken}`
+    };
+
+    // https://api.line.me/v2/bot/message/broadcast
+    const promises = messages.map(async (m) => {
+      const res = await axios.post(`${this.apiBaseUrl}/broadcast`, m, { headers })
       return res
     })
 

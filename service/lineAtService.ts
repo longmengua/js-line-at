@@ -212,22 +212,32 @@ const textMessage = {
   text: `${new Date().toISOString()}\nWelcome to Waltor channel, feel free to say anything you like !!`,
 };
 
-export const LineAtService = async(userId: string) => {
+export const LineAtService = async(userId?: string) => {
   const lineAtClass = new LineAtClass({
     channelAccessToken
   });
-  
-  lineAtClass.sendMessage([
+
+  if (userId) {
+    lineAtClass.sendMessage([
+      {
+        to: userId,
+        messages: [
+          textMessage,
+          // photoMessage,
+          // richMessage,
+          // cardMessage,
+          // flexBubbleMessage,
+          // flexCarouselMessage
+        ]
+      }
+    ]);
+  }
+
+  lineAtClass.broadcastMessage([
     {
-      to: userId,
       messages: [
         textMessage,
-        // photoMessage,
-        // richMessage,
-        // cardMessage,
-        // flexBubbleMessage,
-        // flexCarouselMessage
       ]
     }
-  ]);
+  ])
 }
