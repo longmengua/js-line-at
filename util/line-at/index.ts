@@ -114,6 +114,7 @@ export class LineAtClass {
     };
 
     // https://api.line.me/v2/bot/profile/{userId}
-    return await axios.post(`${this.apiBaseUrl}/profile/${userId}`, { headers })
+    const res = await axios.get(`${this.apiBaseUrl}/profile/${userId}`, { headers })
+    return res?.data
   }
 }
