@@ -104,7 +104,7 @@ export class LineAtClass {
   }
 
   getProfile = async (userId?: string): Promise<any> => {
-    if (userId) {
+    if (!userId) {
       throw new Error("Missing userId");
     }
 
