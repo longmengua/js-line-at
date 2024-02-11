@@ -242,12 +242,14 @@ export const LineAtService = async(userId?: string) => {
     return `sent message to ${profile?.displayName ?? '-'}`
   }
 
-  await lineAtClass.broadcastMessage([
-    {
-      messages: [
-        textMessage,
-      ]
-    }
-  ])
-  return "sent message to all"
+  if (userId == 'all') {
+      await lineAtClass.broadcastMessage([
+        {
+          messages: [
+            textMessage,
+          ]
+        }
+      ])
+      return "sent message to all"
+  }
 }
