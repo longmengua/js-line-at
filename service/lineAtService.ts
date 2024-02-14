@@ -212,44 +212,57 @@ const textMessage = (name: string) => ({
   text: `Dear ${name}, how are you? What are you up to?`,
 });
 
-export const LineAtService = async(userId?: string) => {
-  const lineAtClass = new LineAtClass({
-    channelAccessToken
-  });
-
-  if (userId) {
-    const profile: {
-      displayName: string
-      userId: string
-      language: string
-      pictureUrl: string
-      statusMessage: string
-    } = await lineAtClass.getProfile(userId);
-
-    await lineAtClass.sendMessage([
-      {
-        to: userId,
-        messages: [
-          textMessage(profile?.displayName ?? 'user'),
-          // photoMessage,
-          // richMessage,
-          // cardMessage,
-          // flexBubbleMessage,
-          // flexCarouselMessage
-        ]
-      }
-    ]);
-    return `sent message to ${profile?.displayName ?? '-'}`
+export class LineAtService {
+  private lineAtClass: LineAtClass;
+  
+  constructor() {
+    this.lineAtClass = new LineAtClass({
+      channelAccessToken
+    });
   }
 
-  if (userId == 'all') {
-      await lineAtClass.broadcastMessage([
+  fetchAllUserChatHistroy = async () => {
+    const ids = await this.lineAtClass.fetchAllUserIds()
+
+    return ids
+  }
+
+  sendMsg = async (userId?: string) => {
+  
+    if (userId) {
+      const profile: {
+        displayName: string
+        userId: string
+        language: string
+        pictureUrl: string
+        statusMessage: string
+      } = await this.lineAtClass.fetchUserProfile(userId);
+  
+      await this.lineAtClass.sendMessage([
         {
+          to: userId,
           messages: [
-            textMessage,
+            textMessage(profile?.displayName ?? 'user'),
+            // photoMessage,
+            // richMessage,
+            // cardMessage,
+            // flexBubbleMessage,
+            // flexCarouselMessage
           ]
         }
-      ])
-      return "sent message to all"
+      ]);
+      return `sent message to ${profile?.displayName ?? '-'}`
+    }
+  
+    if (userId == 'all') {
+        await this.lineAtClass.broadcastMessage([
+          {
+            messages: [
+              textMessage,
+            ]
+          }
+        ])
+        return "sent message to all"
+    }
   }
 }

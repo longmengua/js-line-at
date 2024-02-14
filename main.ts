@@ -128,14 +128,25 @@ app.post('/webhook', (req, res) => {
   });
 });
 
+const lineAtService = new LineAtService();
+
 app.get('/send-msg', async (req: Request, res: Response) => {
   // 
   const userId: string = req?.query?.user as string;
-  const msg = await LineAtService(userId)
+  const msg = await lineAtService.sendMsg(userId)
   res.send({
     code: 200,
     data: null,
     msg: msg,
+  });
+});
+
+app.get('/fetch-history', async (req: Request, res: Response) => {
+  const data = await lineAtService.fetchAllUserChatHistroy()
+  res.send({
+    code: 200,
+    data: data,
+    msg: null,
   });
 });
 

@@ -103,7 +103,21 @@ export class LineAtClass {
     return await Promise.allSettled(promises)
   }
 
-  getProfile = async (userId?: string): Promise<any> => {
+  fetchAllUserIds = async (): Promise<any> => {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.channelAccessToken}`
+    };
+
+    // https://api.line.me/v2/bot/followers/ids
+    const res = await axios.get(`${this.apiBaseUrl}/followers/ids`, {
+      headers: headers
+    });
+
+    return res?.data;
+  }
+
+  fetchUserProfile = async (userId?: string): Promise<any> => {
     if (!userId) {
       throw new Error("Missing userId");
     }
@@ -116,5 +130,19 @@ export class LineAtClass {
     // https://api.line.me/v2/bot/profile/{userId}
     const res = await axios.get(`${this.apiBaseUrl}/profile/${userId}`, { headers })
     return res?.data
+  }
+
+  fetchMessageHistory = async (userId?: string): Promise<any> => {
+    const headers = {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${this.channelAccessToken}`
+    };
+
+    // https://api.line.me/v2/bot/message/reply?userId=${userId}
+    const res = await axios.get(`${this.apiBaseUrl}/message/reply?userId=${userId}`, {
+      headers: headers
+    });
+
+    return res?.data;
   }
 }
